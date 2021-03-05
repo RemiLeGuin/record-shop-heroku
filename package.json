@@ -1,6 +1,6 @@
 {
     "name": "record-shop-heroku",
-    "description": "My amazing LWC app",
+    "description": "Welcome to the Record Shop! A demo application to explore possibilities of Progressive Wep Apps made with Node.js and Lightning Web Components Open Source.",
     "version": "0.0.1",
     "author": "Rémi Le Guin",
     "bugs": "https://github.com/RemiLeGuin/record-shop-heroku/issues",

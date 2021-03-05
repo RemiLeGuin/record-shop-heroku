@@ -1,5 +1,5 @@
 import { createElement } from 'lwc';
-import MyApp from 'my/app';
+import Home from 'record-shop/home';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -7,6 +7,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-const app = createElement('my-app', { is: MyApp });
+const app = createElement('record-shop', { is: Home });
 // eslint-disable-next-line @lwc/lwc/no-document-query
 document.querySelector('#main').appendChild(app);
