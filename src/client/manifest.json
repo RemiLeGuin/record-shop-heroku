@@ -3,7 +3,7 @@
     "theme_color": "#2196f3",
     "background_color": "#2196f3",
     "display": "standalone",
-    "short_name": "RecShop",
+    "short_name": "Record Shop",
     "Scope": "/",
     "start_url": "/",
     "icons": [
