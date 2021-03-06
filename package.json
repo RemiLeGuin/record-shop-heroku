@@ -5,12 +5,14 @@
     "author": "Rémi Le Guin",
     "bugs": "https://github.com/RemiLeGuin/record-shop-heroku/issues",
     "dependencies": {
+        "@lwc/synthetic-shadow": "^1.17.5",
         "compression": "^1.7.4",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
         "fs": "0.0.1-security",
         "helmet": "^4.4.1",
         "jsforce": "^1.10.1",
+        "lightning-base-components": "^1.11.2-alpha",
         "node-fetch": "^2.6.1",
         "salesforce-jwt-bearer-token-flow": "^0.2.4"
     },
@@ -62,6 +64,7 @@
         "watch:server": "nodemon"
     },
     "devDependencies": {
+        "@salesforce-ux/design-system": "^2.14.2",
         "eslint": "^7.21.0",
         "lint-staged": "^10.5.4",
         "lwc-services": "^2.3.0",
