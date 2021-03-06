@@ -1,0 +1,18 @@
+<template>
+    <div class="slds-align_absolute-center">
+        <lightning-card title="Record Shop" class="slds-size_large">
+            <lightning-carousel>
+                <template for:each={records} for:item="record">
+                    <lightning-carousel-image
+                        key={record.id}
+                        src="././resources/icons/icon-512x512.png"
+                        header={record.title}
+                        description={record.artist}
+                        alternative-text={record.title}
+                        href={record.listening}>
+                    </lightning-carousel-image>
+                </template>
+            </lightning-carousel>
+        </lightning-card>
+    </div>
+</template>

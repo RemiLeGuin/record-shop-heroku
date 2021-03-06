@@ -1,6 +1,6 @@
 import '@lwc/synthetic-shadow';
 import { createElement } from 'lwc';
-import Home from 'record-shop/home';
+import Home from 'recordshop/home';
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -8,6 +8,6 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-const app = createElement('record-shop', { is: Home });
+const app = createElement('recordshop-home', { is: Home });
 // eslint-disable-next-line @lwc/lwc/no-document-query
 document.querySelector('#main').appendChild(app);
