@@ -4,14 +4,13 @@ const helmet = require('helmet');
 const express = require('express');
 const jsforce = require('jsforce');
 const jwt = require('salesforce-jwt-bearer-token-flow');
-const bodyParser = require('body-parser');
 const fs = require('fs');
 
 const app = express();
 app.use(helmet());
 app.use(compression());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 const HOST = process.env.HOST || 'localhost';
 const PORT = process.env.PORT || 3002;
@@ -36,7 +35,7 @@ if (!SF_PRIVATE_KEY) {
 
 if (!(SF_CONSUMER_KEY && SF_USERNAME && SF_LOGIN_URL && SF_PRIVATE_KEY)) {
     console.error(
-        'Cannot start app: missing mandatory configuration. Check your .env file.'
+        'Cannot start app: missing environment variables.'
     );
     process.exit(-1);
 }
@@ -68,7 +67,7 @@ app.get('/api/records', (_, res) => {
         if (err) {
             res.sendStatus(500);
         } else if (result.records.length === 0) {
-            res.status(404).send('Session not found.');
+            res.status(404).send('No record found.');
         } else {
             const formattedData = result.records.map((record) => {
                 return {
@@ -81,7 +80,7 @@ app.get('/api/records', (_, res) => {
                     cover: record.Cover__c
                 };
             });
-            res.send({ data: formattedData });
+            res.status(200).send({ data: formattedData });
         }
     });
 });
