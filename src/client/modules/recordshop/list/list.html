@@ -1,9 +1,21 @@
 <template>
     <lightning-card title={title}>
         <template for:each={records} for:item="record">
-            <p key={record.id} class="slds-m-vertical_small slds-m-horizontal_medium">
-                <b>{record.title}</b><br />{record.artist}
-            </p>
+            <lightning-button
+                key={record.id}
+                label={record.likes}
+                title="Like"
+                icon-name="utility:like"
+                class="slds-float_right slds-m-left_small">
+            </lightning-button>
+            <a key={record.id} href={record.listening}>
+                <img
+                    src={record.cover}
+                    class="slds-float_left slds-m-right_small width-3em" />
+                <p class="slds-m-vertical_small slds-m-horizontal_medium">
+                    <b>{record.title}</b><br />{record.artist}
+                </p>
+            </a>
         </template>
     </lightning-card>
 </template>
