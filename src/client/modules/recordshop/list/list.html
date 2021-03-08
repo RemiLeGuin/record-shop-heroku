@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title={title}>
+        <template for:each={records} for:item="record">
+            <p key={record.id} class="slds-m-vertical_small slds-m-horizontal_medium">
+                <b>{record.title}</b><br />{record.artist}
+            </p>
+        </template>
+    </lightning-card>
+</template>
