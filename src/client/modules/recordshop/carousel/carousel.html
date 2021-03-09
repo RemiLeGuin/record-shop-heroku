@@ -1,0 +1,16 @@
+<template>
+    <lightning-card title={title}>
+        <lightning-carousel>
+            <template for:each={records} for:item="record">
+                <lightning-carousel-image
+                    key={record.id}
+                    src={record.cover}
+                    header={record.title}
+                    description={record.artist}
+                    alternative-text={record.title}
+                    href={record.listening}>
+                </lightning-carousel-image>
+            </template>
+        </lightning-carousel>
+    </lightning-card>
+</template>

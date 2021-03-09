@@ -62,7 +62,7 @@ jwt.getToken(
 
 app.get('/api/records', (_, res) => {
     const soql = `SELECT Id, Name, Artist__c, Year__c, Likes__c, Listening__c, Cover__c
-                  FROM Record__c ORDER BY CreatedDate ASC`;
+                  FROM Record__c ORDER BY Likes__c DESC, CreatedDate ASC`;
     conn.query(soql, (err, result) => {
         if (err) {
             res.sendStatus(500);

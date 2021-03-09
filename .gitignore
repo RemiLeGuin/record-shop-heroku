@@ -28,5 +28,8 @@ ehthumbs.db
 [Dd]esktop.ini
 $RECYCLE.BIN/
 
-#Dotenv file
+# Dotenv file
 .env
+
+# SLDS styles
+/src/SLDS
