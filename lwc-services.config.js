@@ -6,7 +6,7 @@ module.exports = {
         { from: 'src/client/index.html', to: 'dist/index.html' },
         { from: 'src/client/manifest.json', to: 'dist/manifest.json' },
         { from: 'src/client/pushSW.js', to: 'dist/pushSW.js' },
-        { from: 'node_modules/@salesforce-ux/design-system/assets', to: 'src/SLDS' },
+        //{ from: 'node_modules/@salesforce-ux/design-system/assets', to: 'src/SLDS' },
         { from: 'node_modules/@salesforce-ux/design-system/assets', to: 'dist/SLDS' }
     ],
     sourceDir: './src/client',
