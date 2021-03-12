@@ -13,7 +13,7 @@ export default class Subscription extends LightningElement {
                 this.subscription = await this.swRegistration.pushManager.getSubscription();
                 this.vapidKey = await this.getVapidKey();
                 if (this.subscription) {
-                    this.template.querySelector('.subscription-checkbox').checked = true;
+                    this.template.querySelector('lightning-input').checked = true;
                 }
             });
         } else {
