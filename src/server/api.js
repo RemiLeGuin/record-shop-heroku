@@ -84,3 +84,20 @@ app.get('/api/records', (_, res) => {
         }
     });
 });
+
+app.patch('/api/records/:recordId', (req, res) => {
+    conn.sobject("Record__c").update({ 
+        Id: req.body.id,
+        Likes__c: req.body.likes
+    }, function(err, result) {
+        if (err) {
+            res.sendStatus(500);
+        }
+        else if (!result.success) {
+            return console.error(err, result);
+        }
+        else {
+            res.status(200).send(result);
+        }
+    });
+});

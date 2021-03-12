@@ -1,13 +1,14 @@
 <template>
     <lightning-card title={title}>
         <div class="slds-m-horizontal_medium">
-            <template for:each={records} for:item="record">
+            <template for:each={records} for:item="record" for:index="index">
                 <lightning-button
                     key={record.id}
                     label={record.likes}
-                    title="Like"
+                    title={index}
                     icon-name="utility:like"
-                    class="slds-float_right slds-m-left_small">
+                    class="slds-float_right slds-m-left_small"
+                    onclick={handleClick}>
                 </lightning-button>
                 <a key={record.id} href={record.listening} target="_blank">
                     <img src={record.cover} class="slds-float_left slds-m-right_small width-3em" />
