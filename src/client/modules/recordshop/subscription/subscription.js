@@ -1,5 +1,6 @@
 import { LightningElement } from 'lwc';
 const SERVER_ENDPOINT = 'https://record-shop-lwc-oss.herokuapp.com';
+//const SERVER_ENDPOINT = 'http://localhost:3002';
 
 export default class Subscription extends LightningElement {
     swRegistration = null;
