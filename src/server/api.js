@@ -5,6 +5,8 @@ const express = require('express');
 const jsforce = require('jsforce');
 const jwt = require('salesforce-jwt-bearer-token-flow');
 const fs = require('fs');
+const webPush = require('web-push');
+const cors = require('cors');
 
 const app = express();
 app.use(helmet());
@@ -22,6 +24,18 @@ app.listen(PORT, () =>
     console.log(
         `✅  API Server started: http://${HOST}:${PORT}`
     )
+);
+
+app.use(
+    cors({
+        origin: [
+            'http://localhost:3000',
+            'http://localhost:3001',
+            'http://localhost:3002',
+            'https://record-shop-lwc-oss.herokuapp.com'
+        ],
+        optionsSuccessStatus: 200
+    })
 );
 
 let conn;
@@ -100,4 +114,58 @@ app.patch('/api/records/:recordId', (req, res) => {
             res.status(200).send(result);
         }
     });
+});
+
+const { VAPID_PUBLIC_KEY, VAPID_PRIVATE_KEY } = process.env;
+const SUBSCRIPTION_FILE_PATH = './subscriptions.json';
+
+if (!VAPID_PUBLIC_KEY || !VAPID_PRIVATE_KEY) {
+    console.log('VAPID public/private keys must be set');
+    return;
+}
+
+webPush.setVapidDetails(
+    'mailto:remileguin@live.fr',
+    VAPID_PUBLIC_KEY,
+    VAPID_PRIVATE_KEY
+);
+
+const readSubscriptions = () => {
+    try {
+        return JSON.parse(fs.readFileSync(SUBSCRIPTION_FILE_PATH));
+    } catch (_) {}
+    return {};
+};
+
+const writeSubscriptions = (subscriptions = {}) => {
+    try {
+        fs.writeFileSync(SUBSCRIPTION_FILE_PATH, JSON.stringify(subscriptions));
+    } catch (_) {
+        console.log('Could not write');
+    }
+};
+
+app.get('/vapidPublicKey', (_, res) => {
+    res.send(VAPID_PUBLIC_KEY);
+});
+
+app.post('/subscribe', (req, res) => {
+    const { subscription } = req.body;
+    const subscriptions = readSubscriptions();
+    subscriptions[subscription.endpoint] = { subscription };
+    writeSubscriptions(subscriptions);
+    conn.sobject('Subscription__c').create({
+        Endpoint__c: subscription.endpoint,
+        p256dh__c: subscription.keys.p256dh,
+        auth__c: subscription.keys.auth
+    });
+    res.status(201).send('Subscribe OK');
+}).post('/unsubscribe', (req, res) => {
+    const subscriptions = readSubscriptions();
+    delete subscriptions[req.body.subscription.endpoint];
+    writeSubscriptions(subscriptions);
+    conn.sobject('Subscription__c')
+        .find({ Endpoint__c : req.body.subscription.endpoint })
+        .destroy();
+    res.status(201).send('Unsubscribe OK');
 });
