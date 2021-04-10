@@ -5,11 +5,12 @@ const { GenerateSW } = require('workbox-webpack-plugin');
 
 module.exports = {
     plugins: [
-        /*new CopyPlugin([
-            './src/index.html',
-            './src/manifest.json',
-            './src/resources'
-        ]),*/
+        new CopyPlugin([
+            './src/client/index.html',
+            './src/client/index.js',
+            './src/client/manifest.json',
+            './src/client/resources'
+        ]),
         new GenerateSW({
             swDest: 'sw.js',
             importScripts: ['pushSW.js'],
