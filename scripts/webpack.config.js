@@ -6,10 +6,10 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
     plugins: [
         new CopyPlugin([
-            './src/client/index.html',
+            './src/client/index.html'/*,
             './src/client/index.js',
             './src/client/manifest.json',
-            './src/client/resources'
+            './src/client/resources'*/
         ]),
         new GenerateSW({
             swDest: 'sw.js',
