@@ -7,7 +7,22 @@ module.exports = {
         new GenerateSW({
             swDest: 'sw.js',
             importScripts: ['pushSW.js'],
-            exclude: ['SLDS']
+            skipWaiting: true,
+            clientsClaim: true,
+            runtimeCaching: [
+                {
+                    urlPattern: new RegExp('api/records$'),
+                    handler: 'StaleWhileRevalidate'
+                },
+                {
+                    urlPattern: new RegExp('api/vapidPublicKey$'),
+                    handler: 'StaleWhileRevalidate'
+                },
+                {
+                    urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
+                    handler: 'StaleWhileRevalidate'
+                }
+            ]
         })
     ]
 };
